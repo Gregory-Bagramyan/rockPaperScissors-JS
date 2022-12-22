@@ -1,0 +1,35 @@
+body {
+  background-color: rgb(233, 174, 129);
+  font-size: 16px;
+}
+
+h1 {
+  text-align: center;
+}
+
+.player-selection {
+  display: flex;
+  background-color: aqua;
+  justify-content: center;
+  gap: 10px;
+  height: 100px;
+}
+
+.player-selection li {
+  border: solid;
+  cursor: pointer;
+  width: 10%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgb(176, 252, 121);
+  border-radius: 25% 10%;
+}
+
+.player-selection li:hover {
+  background-color: rgb(117, 180, 235);
+}
+
+.display {
+  background-color: rgb(255, 127, 240);
+}

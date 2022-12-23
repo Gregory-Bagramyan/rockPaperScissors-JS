@@ -11,7 +11,7 @@ h1 {
   display: flex;
   background-color: aqua;
   justify-content: center;
-  gap: 10px;
+  gap: 3%;
   height: 100px;
 }
 
@@ -31,5 +31,31 @@ h1 {
 }
 
 .display {
+  display: flex;
+  justify-content: center;
+  gap: 3%;
+  background-color: blanchedalmond;
+  height: 100px;
+}
+
+.display div {
+  border: solid 2px;
+  width: 12%;
+  border-radius: 7%;
+  justify-content: center;
+  align-items: center;
+}
+
+.display div:empty {
+  display: None;
+}
+
+.player-choice-display {
+  display: flex;
   background-color: rgb(255, 127, 240);
+}
+
+.robot-choice-display {
+  display: flex;
+  background-color: rgb(131, 144, 231);
 }

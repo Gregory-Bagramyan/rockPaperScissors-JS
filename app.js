@@ -14,43 +14,64 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   function robotChoosing() {
-    return posibleChoices[Math.floor(Math.random() * posibleChoices.length)];
+    robotChoice =
+      posibleChoices[Math.floor(Math.random() * posibleChoices.length)];
+    return robotChoice;
   }
 
-  async function rockPlayedHandler() {
-    playerChoice = "rock";
+  function displayPlayerChoice(playerChoice) {
     const playerChoiceDisplay = `you chose ${playerChoice} bruv`;
     document.querySelector(".player-choice-display").innerHTML =
       playerChoiceDisplay;
-    robotChoice = robotChoosing();
-    await delay(800);
+  }
+
+  function displayRobotChoice(robotChoice) {
     const robotChoiceDisplay = `I chose ${robotChoice} dawg`;
     document.querySelector(".robot-choice-display").innerHTML =
       robotChoiceDisplay;
   }
 
+  function determinWinnerSentence() {
+    // count points function
+    if (playerChoice === robotChoice) {
+      return "it's a draw my man";
+    } else if (
+      (playerChoice === "rock" && robotChoice === "scissors") ||
+      (playerChoice === "paper" && robotChoice === "rock") ||
+      (playerChoice === "scissors" && robotChoice === "paper")
+    ) {
+      return "you won congrats I hope you're happy..";
+    } else if (
+      (robotChoice === "rock" && playerChoice === "scissors") ||
+      (robotChoice === "paper" && playerChoice === "rock") ||
+      (robotChoice === "scissors" && playerChoice === "paper")
+    ) {
+      return "I won sorry but you're laaame";
+    }
+  }
+
+  async function rockPlayedHandler() {
+    playerChoice = "rock";
+    initiateGameSequence();
+  }
+
   async function paperPlayedHandler() {
     playerChoice = "paper";
-    const playerChoiceDisplay = `you chose ${playerChoice} fam`;
-    document.querySelector(".player-choice-display").innerHTML =
-      playerChoiceDisplay;
-    robotChoice = robotChoosing();
-    await delay(800);
-    const robotChoiceDisplay = `I chose ${robotChoice} brruv`;
-    document.querySelector(".robot-choice-display").innerHTML =
-      robotChoiceDisplay;
+    initiateGameSequence();
   }
 
   async function scissorsPlayedHandler() {
     playerChoice = "scissors";
-    const playerChoiceDisplay = `you chose ${playerChoice} dawg`;
-    document.querySelector(".player-choice-display").innerHTML =
-      playerChoiceDisplay;
-    robotChoice = robotChoosing();
+    initiateGameSequence();
+  }
+
+  async function initiateGameSequence() {
+    displayPlayerChoice(playerChoice);
     await delay(800);
-    const robotChoiceDisplay = `I chose ${robotChoice} fam`;
-    document.querySelector(".robot-choice-display").innerHTML =
-      robotChoiceDisplay;
+    displayRobotChoice(robotChoosing());
+    const endGameSentence = determinWinnerSentence();
+    console.log(endGameSentence);
+    // displayEngGameSentence()
   }
 
   rock.addEventListener("click", rockPlayedHandler);

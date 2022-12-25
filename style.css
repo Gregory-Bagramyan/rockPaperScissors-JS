@@ -1,3 +1,15 @@
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&display=swap");
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-family: "Noto Sans JP", sans-serif;
+}
+
 body {
   background-color: rgb(233, 174, 129);
   font-size: 16px;
@@ -5,6 +17,8 @@ body {
 
 h1 {
   text-align: center;
+  margin-top: 16px;
+  margin-bottom: 16px;
 }
 
 .player-selection {
@@ -13,6 +27,7 @@ h1 {
   justify-content: center;
   gap: 3%;
   height: 100px;
+  margin-bottom: 16px;
 }
 
 .player-selection li {
@@ -30,15 +45,16 @@ h1 {
   background-color: rgb(117, 180, 235);
 }
 
-.display {
+.display-choices {
   display: flex;
   justify-content: center;
   gap: 3%;
   background-color: blanchedalmond;
   height: 100px;
+  margin-bottom: 16px;
 }
 
-.display div {
+.display-choices div {
   border: solid 2px;
   width: 12%;
   border-radius: 7%;
@@ -46,7 +62,7 @@ h1 {
   align-items: center;
 }
 
-.display div:empty {
+.display-choices div:empty {
   display: None;
 }
 
@@ -58,4 +74,25 @@ h1 {
 .robot-choice-display {
   display: flex;
   background-color: rgb(131, 144, 231);
+}
+
+.display-end-game-sentence-box {
+  background: rgb(186, 236, 150);
+  display: flex;
+  height: 100px;
+  justify-content: center;
+}
+
+.display-end-game-sentence-box div:empty {
+  display: None;
+}
+
+.display-end-game-sentence-box div {
+  display: flex;
+  background: rgb(236, 150, 150);
+  border: solid 2px;
+  width: 15%;
+  border-radius: 7%;
+  justify-content: center;
+  align-items: center;
 }

@@ -50,6 +50,12 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
+  function displayEngGameSentence(endGameSentence) {
+    console.log(endGameSentence);
+    document.querySelector(".display-end-game-sentence-box div").innerHTML =
+      endGameSentence;
+  }
+
   async function rockPlayedHandler() {
     playerChoice = "rock";
     initiateGameSequence();
@@ -67,11 +73,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
   async function initiateGameSequence() {
     displayPlayerChoice(playerChoice);
-    await delay(800);
+    await delay(700);
     displayRobotChoice(robotChoosing());
     const endGameSentence = determinWinnerSentence();
-    console.log(endGameSentence);
-    // displayEngGameSentence()
+    await delay(700);
+    displayEngGameSentence(endGameSentence);
   }
 
   rock.addEventListener("click", rockPlayedHandler);

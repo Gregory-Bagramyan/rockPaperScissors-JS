@@ -16,6 +16,7 @@ body {
 }
 
 h1 {
+  font-size: 1.55rem;
   text-align: center;
   margin-top: 16px;
   margin-bottom: 16px;
@@ -26,14 +27,14 @@ h1 {
   background-color: aqua;
   justify-content: center;
   gap: 3%;
-  height: 100px;
+  height: 80px;
   margin-bottom: 16px;
 }
 
 .player-selection li {
+  width: 25%;
   border: solid;
   cursor: pointer;
-  width: 10%;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -50,13 +51,13 @@ h1 {
   justify-content: center;
   gap: 3%;
   background-color: blanchedalmond;
-  height: 100px;
+  height: 80px;
   margin-bottom: 16px;
 }
 
 .display-choices div {
   border: solid 2px;
-  width: 12%;
+  width: 25%;
   border-radius: 7%;
   justify-content: center;
   align-items: center;
@@ -79,7 +80,7 @@ h1 {
 .display-end-game-sentence-box {
   background: rgb(186, 236, 150);
   display: flex;
-  height: 100px;
+  height: 80px;
   justify-content: center;
 }
 
@@ -91,8 +92,39 @@ h1 {
   display: flex;
   background: rgb(236, 150, 150);
   border: solid 2px;
-  width: 15%;
+  /* width: 33%; */
+  flex: 0.3 0 33%;
   border-radius: 7%;
   justify-content: center;
   align-items: center;
+}
+
+@media (min-width: 580px) {
+  h1 {
+    font-size: 2rem;
+  }
+
+  .player-selection {
+    height: 100px;
+  }
+
+  .player-selection li {
+    width: 10%;
+  }
+
+  .display-choices {
+    height: 100px;
+  }
+
+  .display-choices div {
+    width: 10%;
+  }
+
+  .display-end-game-sentence-box {
+    height: 100px;
+  }
+
+  .display-end-game-sentence-box div {
+    flex: 0.15 0 10%;
+  }
 }

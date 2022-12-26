@@ -1,8 +1,12 @@
 document.addEventListener("DOMContentLoaded", () => {
+  const h1 = document.querySelector("h1");
   const rock = document.querySelector(".rock");
   const paper = document.querySelector(".paper");
   const scissors = document.querySelector(".scissors");
+  const french = document.querySelector(".french");
+  const english = document.querySelector(".english");
 
+  const language = "english";
   let playerChoice = null;
   const posibleChoices = ["rock", "paper", "scissors"];
   let robotChoice = null;
@@ -51,7 +55,6 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   function displayEngGameSentence(endGameSentence) {
-    console.log(endGameSentence);
     document.querySelector(".display-end-game-sentence-box div").innerHTML =
       endGameSentence;
   }
@@ -80,7 +83,23 @@ document.addEventListener("DOMContentLoaded", () => {
     displayEngGameSentence(endGameSentence);
   }
 
+  function translateToFrench() {
+    h1.innerHTML = "Choisie ton arme";
+    rock.innerHTML = "Pierre";
+    paper.innerHTML = "Feuille";
+    scissors.innerHTML = "Ciseaux";
+  }
+
+  function translateToEnglish() {
+    h1.innerHTML = "Choose your weapon";
+    rock.innerHTML = "Rock";
+    paper.innerHTML = "Paper";
+    scissors.innerHTML = "Scissors";
+  }
+
   rock.addEventListener("click", rockPlayedHandler);
   paper.addEventListener("click", paperPlayedHandler);
   scissors.addEventListener("click", scissorsPlayedHandler);
+  french.addEventListener("click", translateToFrench);
+  english.addEventListener("click", translateToEnglish);
 });

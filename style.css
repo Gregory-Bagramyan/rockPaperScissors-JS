@@ -17,11 +17,11 @@ body {
 
 .languages {
   display: flex;
-  gap: 0.5%;
+  gap: 1%;
 }
 
 .languages li {
-  width: 5%;
+  width: 15%;
   border: solid;
   cursor: pointer;
   display: flex;
@@ -116,6 +116,14 @@ h1 {
 }
 
 @media (min-width: 580px) {
+  .languages {
+    gap: 0.5%;
+  }
+
+  .languages li {
+    width: 5%;
+  }
+
   h1 {
     font-size: 2rem;
   }

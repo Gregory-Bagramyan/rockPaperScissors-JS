@@ -5,11 +5,18 @@ document.addEventListener("DOMContentLoaded", () => {
   const scissors = document.querySelector(".scissors");
   const french = document.querySelector(".french");
   const english = document.querySelector(".english");
+  let robotChoiceDisplay = document.querySelector(".robot-choice-display");
+  let playerChoiceDisplay = document.querySelector(".player-choice-display");
+  let endGameDisplay = document.querySelector(
+    ".display-end-game-sentence-box div"
+  );
 
-  const language = "english";
+  let language = "english";
   let playerChoice = null;
+  let playerChoiceFrench = null;
   const posibleChoices = ["rock", "paper", "scissors"];
   let robotChoice = null;
+  let robotChoiceFrench = null;
 
   function delay(milliseconds) {
     return new Promise((resolve) => {
@@ -24,39 +31,66 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   function displayPlayerChoice(playerChoice) {
-    const playerChoiceDisplay = `you chose ${playerChoice} bruv`;
-    document.querySelector(".player-choice-display").innerHTML =
-      playerChoiceDisplay;
+    if (language === "english") {
+      const playerChoiceSentence = `you chose ${playerChoice} bruv`;
+      playerChoiceDisplay.innerHTML = playerChoiceSentence;
+    } else if (language === "french") {
+      if (playerChoice === "rock") {
+        playerChoiceFrench = "pierre";
+      } else if (playerChoice === "paper") {
+        playerChoiceFrench = "feuille";
+      } else if (playerChoice === "scissors") {
+        playerChoiceFrench = "ciseaux";
+      }
+      const playerChoiceSentence = `t'as choisi ${playerChoiceFrench} mon pote`;
+      playerChoiceDisplay.innerHTML = playerChoiceSentence;
+    }
   }
 
   function displayRobotChoice(robotChoice) {
-    const robotChoiceDisplay = `I chose ${robotChoice} dawg`;
-    document.querySelector(".robot-choice-display").innerHTML =
-      robotChoiceDisplay;
+    if (language === "english") {
+      const robotChoiceSentence = `I chose ${robotChoice} dawg`;
+      robotChoiceDisplay.innerHTML = robotChoiceSentence;
+    } else if (language === "french") {
+      if (robotChoice === "rock") {
+        robotChoiceFrench = "pierre";
+      } else if (robotChoice === "paper") {
+        robotChoiceFrench = "feuille";
+      } else if (robotChoice === "scissors") {
+        robotChoiceFrench = "ciseaux";
+      }
+      const robotChoiceSentence = `J'ai choisi ${robotChoiceFrench} gros`;
+      robotChoiceDisplay.innerHTML = robotChoiceSentence;
+    }
   }
 
   function determinWinnerSentence() {
     // count points function
     if (playerChoice === robotChoice) {
-      return "it's a draw my man";
+      return language === "english"
+        ? "it's a draw my man"
+        : "égalité la famille";
     } else if (
       (playerChoice === "rock" && robotChoice === "scissors") ||
       (playerChoice === "paper" && robotChoice === "rock") ||
       (playerChoice === "scissors" && robotChoice === "paper")
     ) {
-      return "you won congrats I hope you're happy..";
+      return language === "english"
+        ? "you won congrats I hope you're happy.."
+        : "t'as gagné félicitation j'espère que t'es content.e";
     } else if (
       (robotChoice === "rock" && playerChoice === "scissors") ||
       (robotChoice === "paper" && playerChoice === "rock") ||
       (robotChoice === "scissors" && playerChoice === "paper")
     ) {
-      return "I won sorry but you're laaame";
+      return language === "english"
+        ? "I won sorry but you're laaame"
+        : "J'ai gagné dsl mais t'es naaze";
     }
   }
 
   function displayEngGameSentence(endGameSentence) {
-    document.querySelector(".display-end-game-sentence-box div").innerHTML =
-      endGameSentence;
+    endGameDisplay.innerHTML = endGameSentence;
   }
 
   async function rockPlayedHandler() {
@@ -84,6 +118,11 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   function translateToFrench() {
+    playerChoiceDisplay.innerHTML = null;
+    robotChoiceDisplay.innerHTML = null;
+    endGameDisplay.innerHTML = null;
+
+    language = "french";
     h1.innerHTML = "Choisie ton arme";
     rock.innerHTML = "Pierre";
     paper.innerHTML = "Feuille";
@@ -91,6 +130,11 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   function translateToEnglish() {
+    playerChoiceDisplay.innerHTML = null;
+    robotChoiceDisplay.innerHTML = null;
+    endGameDisplay.innerHTML = null;
+
+    language = "english";
     h1.innerHTML = "Choose your weapon";
     rock.innerHTML = "Rock";
     paper.innerHTML = "Paper";

@@ -98,6 +98,7 @@ h1 {
   display: flex;
   height: 80px;
   justify-content: center;
+  margin-bottom: 16px;
 }
 
 .display-end-game-sentence-box div:empty {
@@ -110,6 +111,29 @@ h1 {
   border: solid 2px;
   /* width: 33%; */
   flex: 0.3 0 33%;
+  border-radius: 7%;
+  justify-content: center;
+  align-items: center;
+}
+
+.display-scores-box {
+  background: rgb(211, 134, 255);
+  display: flex;
+  height: 80px;
+  justify-content: center;
+  margin-bottom: 16px;
+  gap: 3%;
+}
+
+.display-scores-box div:empty {
+  display: None;
+}
+
+.display-scores-box div {
+  display: flex;
+  background: rgb(149, 248, 119);
+  border: solid 2px;
+  width: 33%;
   border-radius: 7%;
   justify-content: center;
   align-items: center;
@@ -150,5 +174,12 @@ h1 {
 
   .display-end-game-sentence-box div {
     flex: 0.15 0 10%;
+  }
+  .display-scores-box {
+    height: 100px;
+  }
+
+  .display-scores-box div {
+    width: 15%;
   }
 }

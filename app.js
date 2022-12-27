@@ -5,11 +5,13 @@ document.addEventListener("DOMContentLoaded", () => {
   const scissors = document.querySelector(".scissors");
   const french = document.querySelector(".french");
   const english = document.querySelector(".english");
-  let robotChoiceDisplay = document.querySelector(".robot-choice-display");
-  let playerChoiceDisplay = document.querySelector(".player-choice-display");
-  let endGameDisplay = document.querySelector(
+  const robotChoiceDisplay = document.querySelector(".robot-choice-display");
+  const playerChoiceDisplay = document.querySelector(".player-choice-display");
+  const endGameDisplay = document.querySelector(
     ".display-end-game-sentence-box div"
   );
+  const playerScoreDisplay = document.querySelector(".display-player-score");
+  const robotScoreDisplay = document.querySelector(".display-robot-score");
 
   let language = "english";
   let playerChoice = null;
@@ -17,6 +19,11 @@ document.addEventListener("DOMContentLoaded", () => {
   const posibleChoices = ["rock", "paper", "scissors"];
   let robotChoice = null;
   let robotChoiceFrench = null;
+  let roundWinner = null;
+  let playerPoints = 0;
+  let robotPoints = 0;
+  let playerDisplayScoreSentence = "Player's Score for the round";
+  let robotDisplayScoreSentence = "Robots' Score for the round";
 
   function delay(milliseconds) {
     return new Promise((resolve) => {
@@ -64,46 +71,69 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
-  function determinWinnerSentence() {
-    // count points function
+  function determinWinner() {
     if (playerChoice === robotChoice) {
-      return language === "english"
-        ? "it's a draw my man"
-        : "égalité la famille";
+      roundWinner = "draw";
     } else if (
       (playerChoice === "rock" && robotChoice === "scissors") ||
       (playerChoice === "paper" && robotChoice === "rock") ||
       (playerChoice === "scissors" && robotChoice === "paper")
     ) {
-      return language === "english"
-        ? "you won congrats I hope you're happy.."
-        : "t'as gagné félicitation j'espère que t'es content.e";
+      roundWinner = "player";
     } else if (
       (robotChoice === "rock" && playerChoice === "scissors") ||
       (robotChoice === "paper" && playerChoice === "rock") ||
       (robotChoice === "scissors" && playerChoice === "paper")
     ) {
+      roundWinner = "robot";
+    }
+  }
+
+  function countPoints() {
+    if (roundWinner === "player") {
+      playerPoints += 1;
+    } else if (roundWinner === "robot") {
+      robotPoints += 1;
+    }
+  }
+
+  function determinWinnerSentence() {
+    // count points function
+    if (roundWinner === "draw") {
+      return language === "english"
+        ? "it's a draw my man"
+        : "égalité la famille";
+    } else if (roundWinner === "player") {
+      return language === "english"
+        ? "you won congrats I hope you're happy.."
+        : "t'as gagné félicitation j'espère que t'es content.e";
+    } else if (roundWinner === "robot") {
       return language === "english"
         ? "I won sorry but you're laaame"
         : "J'ai gagné dsl mais t'es naaze";
     }
   }
 
+  function displayScores() {
+    playerScoreDisplay.innerHTML = `${playerDisplayScoreSentence}: ${playerPoints}`;
+    robotScoreDisplay.innerHTML = `${robotDisplayScoreSentence}: ${robotPoints}`;
+  }
+
   function displayEngGameSentence(endGameSentence) {
     endGameDisplay.innerHTML = endGameSentence;
   }
 
-  async function rockPlayedHandler() {
+  function rockPlayedHandler() {
     playerChoice = "rock";
     initiateGameSequence();
   }
 
-  async function paperPlayedHandler() {
+  function paperPlayedHandler() {
     playerChoice = "paper";
     initiateGameSequence();
   }
 
-  async function scissorsPlayedHandler() {
+  function scissorsPlayedHandler() {
     playerChoice = "scissors";
     initiateGameSequence();
   }
@@ -112,9 +142,13 @@ document.addEventListener("DOMContentLoaded", () => {
     displayPlayerChoice(playerChoice);
     await delay(700);
     displayRobotChoice(robotChoosing());
+    determinWinner();
+    countPoints();
     const endGameSentence = determinWinnerSentence();
     await delay(700);
     displayEngGameSentence(endGameSentence);
+    await delay(700);
+    displayScores();
   }
 
   function translateToFrench() {
@@ -127,6 +161,10 @@ document.addEventListener("DOMContentLoaded", () => {
     rock.innerHTML = "Pierre";
     paper.innerHTML = "Feuille";
     scissors.innerHTML = "Ciseaux";
+    playerDisplayScoreSentence = "Score du joueur pour le round";
+    robotDisplayScoreSentence = "Score du robot pour le round";
+    playerScoreDisplay.innerHTML = `${playerDisplayScoreSentence}: ${playerPoints}`;
+    robotScoreDisplay.innerHTML = `${robotDisplayScoreSentence}: ${robotPoints}`;
   }
 
   function translateToEnglish() {
@@ -139,6 +177,10 @@ document.addEventListener("DOMContentLoaded", () => {
     rock.innerHTML = "Rock";
     paper.innerHTML = "Paper";
     scissors.innerHTML = "Scissors";
+    playerDisplayScoreSentence = "Player's Score For The Round";
+    robotDisplayScoreSentence = "Robots' Score For The Round";
+    playerScoreDisplay.innerHTML = `${playerDisplayScoreSentence}: ${playerPoints}`;
+    robotScoreDisplay.innerHTML = `${robotDisplayScoreSentence}: ${robotPoints}`;
   }
 
   rock.addEventListener("click", rockPlayedHandler);

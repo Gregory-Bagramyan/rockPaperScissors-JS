@@ -3,6 +3,7 @@
   <head>
     <link rel="stylesheet" type="text/css" href="style.css" />
     <script src="app.js"></script>
+    <script src="db.js"></script>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -31,6 +32,21 @@
     <div class="display-scores-box">
       <div class="display-player-score"></div>
       <div class="display-robot-score"></div>
+    </div>
+    <div class="database">
+      <div id="enterDetails">
+        <h2>Enter Details</h2>
+        <h4>ID</h4>
+        <input id="enterID" type="text" />
+        <button id="insert">INSERT</button>
+      </div>
+      <div id="findrDetails">
+        <h2>Find Details</h2>
+        <h4>ID</h4>
+        <input id="findID" type="text" />
+        <button id="find">FIND</button>
+        <h4 id="findScore" type="text"></h4>
+      </div>
     </div>
   </body>
 </html>

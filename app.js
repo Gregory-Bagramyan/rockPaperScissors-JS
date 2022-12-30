@@ -3,6 +3,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const rock = document.querySelector(".rock");
   const paper = document.querySelector(".paper");
   const scissors = document.querySelector(".scissors");
+  const playerOptions = document.querySelectorAll(".player-selection li");
   const french = document.querySelector(".french");
   const english = document.querySelector(".english");
   const robotChoiceDisplay = document.querySelector(".robot-choice-display");
@@ -139,6 +140,9 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   async function initiateGameSequence() {
+    disableClicks();
+    removeDisplays();
+    await delay(200);
     displayPlayerChoice(playerChoice);
     await delay(700);
     displayRobotChoice(robotChoosing());
@@ -149,12 +153,11 @@ document.addEventListener("DOMContentLoaded", () => {
     displayEngGameSentence(endGameSentence);
     await delay(700);
     displayScores();
+    enableClicks();
   }
 
   function translateToFrench() {
-    playerChoiceDisplay.innerHTML = null;
-    robotChoiceDisplay.innerHTML = null;
-    endGameDisplay.innerHTML = null;
+    removeDisplays();
 
     language = "french";
     h1.innerHTML = "Choisie ton arme";
@@ -168,10 +171,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   function translateToEnglish() {
-    playerChoiceDisplay.innerHTML = null;
-    robotChoiceDisplay.innerHTML = null;
-    endGameDisplay.innerHTML = null;
-
+    disableClicks();
     language = "english";
     h1.innerHTML = "Choose your weapon";
     rock.innerHTML = "Rock";
@@ -183,9 +183,30 @@ document.addEventListener("DOMContentLoaded", () => {
     robotScoreDisplay.innerHTML = `${robotDisplayScoreSentence}: ${robotPoints}`;
   }
 
-  rock.addEventListener("click", rockPlayedHandler);
-  paper.addEventListener("click", paperPlayedHandler);
-  scissors.addEventListener("click", scissorsPlayedHandler);
+  function disableClicks() {
+    rock.removeEventListener("click", rockPlayedHandler);
+    paper.removeEventListener("click", paperPlayedHandler);
+    scissors.removeEventListener("click", scissorsPlayedHandler);
+    // rock.style.backgroundColor = "grey";
+    playerOptions.forEach((item) => (item.style.backgroundColor = "grey"));
+  }
+
+  function enableClicks() {
+    rock.addEventListener("click", rockPlayedHandler);
+    paper.addEventListener("click", paperPlayedHandler);
+    scissors.addEventListener("click", scissorsPlayedHandler);
+    playerOptions.forEach(
+      (item) => (item.style.backgroundColor = "rgb(176, 252, 121)")
+    );
+  }
+
+  function removeDisplays() {
+    playerChoiceDisplay.innerHTML = null;
+    robotChoiceDisplay.innerHTML = null;
+    endGameDisplay.innerHTML = null;
+  }
+
   french.addEventListener("click", translateToFrench);
   english.addEventListener("click", translateToEnglish);
+  enableClicks();
 });

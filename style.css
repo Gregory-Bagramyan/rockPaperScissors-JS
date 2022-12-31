@@ -54,11 +54,27 @@ h1 {
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: rgb(176, 252, 121);
+  /* background-color: rgb(176, 252, 121); */
   border-radius: 25% 10%;
 }
 
-.player-selection li:hover {
+/* .player-selection li:hover {
+  background-color: rgb(117, 180, 235);
+} */
+
+.green-background {
+  background-color: rgb(176, 252, 121);
+}
+
+.blue-background {
+  background-color: rgb(117, 180, 235);
+}
+
+.grey-background {
+  background-color: grey;
+}
+
+.blue-hover:hover {
   background-color: rgb(117, 180, 235);
 }
 

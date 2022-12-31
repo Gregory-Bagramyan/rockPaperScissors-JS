@@ -3,6 +3,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const rock = document.querySelector(".rock");
   const paper = document.querySelector(".paper");
   const scissors = document.querySelector(".scissors");
+  const playerOptionsBox = document.querySelector(".player-selection");
   const playerOptions = document.querySelectorAll(".player-selection li");
   const french = document.querySelector(".french");
   const english = document.querySelector(".english");
@@ -188,16 +189,22 @@ document.addEventListener("DOMContentLoaded", () => {
     paper.removeEventListener("click", paperPlayedHandler);
     scissors.removeEventListener("click", scissorsPlayedHandler);
     // rock.style.backgroundColor = "grey";
-    playerOptions.forEach((item) => (item.style.backgroundColor = "grey"));
+    playerOptions.forEach((item) =>
+      item.innerHTML.toLowerCase() === playerChoice
+        ? item.classList.add("blue-background")
+        : item.classList.add("grey-background")
+    );
+    playerOptions.forEach((item) => item.classList.remove("blue-hover"));
   }
 
   function enableClicks() {
     rock.addEventListener("click", rockPlayedHandler);
     paper.addEventListener("click", paperPlayedHandler);
     scissors.addEventListener("click", scissorsPlayedHandler);
-    playerOptions.forEach(
-      (item) => (item.style.backgroundColor = "rgb(176, 252, 121)")
-    );
+    playerOptions.forEach((item) => item.classList.remove("grey-background"));
+    playerOptions.forEach((item) => item.classList.remove("blue-background"));
+    playerOptions.forEach((item) => item.classList.add("green-background"));
+    playerOptions.forEach((item) => item.classList.add("blue-hover"));
   }
 
   function removeDisplays() {

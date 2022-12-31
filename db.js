@@ -17,14 +17,16 @@ import {
 } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-database.js";
 
 let db = getDatabase();
-let enterID = document.querySelector("#enterID");
-let findID = document.querySelector("#findID");
+let enterName = document.querySelector("#enterName");
+let findName = document.querySelector("#findName");
 let findScore = document.querySelector("#findScore");
 
 let insertBtn = document.querySelector("#insert");
 let findBtn = document.querySelector("#find");
 
-function InsertData() {}
+function InsertData() {
+  set({ Name: enterID.value });
+}
 
 function FindData() {}
 

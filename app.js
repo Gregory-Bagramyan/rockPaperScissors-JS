@@ -24,6 +24,7 @@ document.addEventListener("DOMContentLoaded", () => {
   let roundWinner = null;
   let playerPoints = 0;
   let robotPoints = 0;
+  let totalScore = 0;
   let playerDisplayScoreSentence = "Player's Score for the round";
   let robotDisplayScoreSentence = "Robots' Score for the round";
 
@@ -154,6 +155,7 @@ document.addEventListener("DOMContentLoaded", () => {
     displayEngGameSentence(endGameSentence);
     await delay(700);
     displayScores();
+    checkTotalScore();
     enableClicks();
   }
 
@@ -211,6 +213,39 @@ document.addEventListener("DOMContentLoaded", () => {
     playerChoiceDisplay.innerHTML = null;
     robotChoiceDisplay.innerHTML = null;
     endGameDisplay.innerHTML = null;
+  }
+
+  function checkTotalScore() {
+    if (playerPoints === 3) {
+      totalScore += 1;
+      resetRoundPoints();
+      // displayTotalScore()
+      removeRoundScores();
+      console.log(`total Score = ${totalScore}`);
+    } else if (robotPoints === 3) {
+      gameOver();
+      console.log(`Final Total Score = ${totalScore}`);
+      console.log("game over");
+      console.log(`total Score = ${totalScore}`);
+    }
+  }
+
+  function removeRoundScores() {
+    playerScoreDisplay.innerHTML = null;
+    robotScoreDisplay.innerHTML = null;
+  }
+
+  function resetRoundPoints() {
+    playerPoints = 0;
+    robotPoints = 0;
+  }
+
+  function gameOver() {
+    resetRoundPoints();
+    totalScore = 0;
+    removeRoundScores();
+    // displaySaveScore()
+    // displayHighestScore()
   }
 
   french.addEventListener("click", translateToFrench);

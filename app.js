@@ -1,3 +1,5 @@
+import { InsertData, insertBtn } from "./db.js";
+
 document.addEventListener("DOMContentLoaded", () => {
   const h1 = document.querySelector("h1");
   const rock = document.querySelector(".rock");
@@ -248,7 +250,13 @@ document.addEventListener("DOMContentLoaded", () => {
     // displayHighestScore()
   }
 
+  function callInsertData() {
+    console.log(`${totalScore} from app`);
+    InsertData(totalScore);
+  }
+
   french.addEventListener("click", translateToFrench);
   english.addEventListener("click", translateToEnglish);
+  insertBtn.addEventListener("click", callInsertData);
   enableClicks();
 });

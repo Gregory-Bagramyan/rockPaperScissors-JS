@@ -1,4 +1,4 @@
-import { InsertData, insertBtn } from "./db.js";
+import { InsertData, insertBtn, FindData, findBtn } from "./db.js";
 
 document.addEventListener("DOMContentLoaded", () => {
   const h1 = document.querySelector("h1");
@@ -16,11 +16,11 @@ document.addEventListener("DOMContentLoaded", () => {
   );
   const playerScoreDisplay = document.querySelector(".display-player-score");
   const robotScoreDisplay = document.querySelector(".display-robot-score");
+  const posibleChoices = ["rock", "paper", "scissors"];
 
   let language = "english";
   let playerChoice = null;
   let playerChoiceFrench = null;
-  const posibleChoices = ["rock", "paper", "scissors"];
   let robotChoice = null;
   let robotChoiceFrench = null;
   let roundWinner = null;
@@ -258,5 +258,20 @@ document.addEventListener("DOMContentLoaded", () => {
   french.addEventListener("click", translateToFrench);
   english.addEventListener("click", translateToEnglish);
   insertBtn.addEventListener("click", callInsertData);
+  findBtn.addEventListener("click", FindData);
   enableClicks();
 });
+
+//generate random id instead of name as an id (to avoid overwriting) (done)
+//retrieve top 3 Scores and Player Names (done)
+//incorporte save score in game sequence (before reinitializing totalScore)
+// -> option to save appears only after a game over
+// => Make it a pop up window
+//retrieve top 3 scores and display them right after the save of the highest sccore
+//make connection to db secure (change from the the not secure one)
+//hide API key (dotenv or other methode)
+//publish with filezilla
+//improve save score and display top3 scores display (as a popup window)
+//display total score
+//add a flavicon
+//add rules and highest score buttons (like FR & ENG but on opposit side)

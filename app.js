@@ -16,6 +16,9 @@ document.addEventListener("DOMContentLoaded", () => {
   );
   const playerScoreDisplay = document.querySelector(".display-player-score");
   const robotScoreDisplay = document.querySelector(".display-robot-score");
+  const playerTotalScoreDisplay = document.querySelector(
+    ".display-player-total-score"
+  );
   const posibleChoices = ["rock", "paper", "scissors"];
 
   let language = "english";
@@ -29,6 +32,7 @@ document.addEventListener("DOMContentLoaded", () => {
   let totalScore = 0;
   let playerDisplayScoreSentence = "Player's Score for the round";
   let robotDisplayScoreSentence = "Robots' Score for the round";
+  let playerDisplayTotalScoreSentence = "Total Score";
 
   function delay(milliseconds) {
     return new Promise((resolve) => {
@@ -128,6 +132,10 @@ document.addEventListener("DOMContentLoaded", () => {
     endGameDisplay.innerHTML = endGameSentence;
   }
 
+  function displayTotalScore() {
+    playerTotalScoreDisplay.innerHTML = `${playerDisplayTotalScoreSentence}: ${totalScore}`;
+  }
+
   function rockPlayedHandler() {
     playerChoice = "rock";
     initiateGameSequence();
@@ -146,18 +154,20 @@ document.addEventListener("DOMContentLoaded", () => {
   async function initiateGameSequence() {
     disableClicks();
     removeDisplays();
-    await delay(200);
+    await delay(300);
     displayPlayerChoice(playerChoice);
-    await delay(700);
+    await delay(300);
     displayRobotChoice(robotChoosing());
     determinWinner();
     countPoints();
     const endGameSentence = determinWinnerSentence();
-    await delay(700);
+    await delay(300);
     displayEngGameSentence(endGameSentence);
-    await delay(700);
+    await delay(300);
     displayScores();
     checkTotalScore();
+    await delay(200);
+    displayTotalScore();
     enableClicks();
   }
 
@@ -171,12 +181,13 @@ document.addEventListener("DOMContentLoaded", () => {
     scissors.innerHTML = "Ciseaux";
     playerDisplayScoreSentence = "Score du joueur pour le round";
     robotDisplayScoreSentence = "Score du robot pour le round";
+    playerDisplayTotalScoreSentence = "Score Totale";
     playerScoreDisplay.innerHTML = `${playerDisplayScoreSentence}: ${playerPoints}`;
     robotScoreDisplay.innerHTML = `${robotDisplayScoreSentence}: ${robotPoints}`;
   }
 
   function translateToEnglish() {
-    disableClicks();
+    removeDisplays();
     language = "english";
     h1.innerHTML = "Choose your weapon";
     rock.innerHTML = "Rock";
@@ -184,6 +195,7 @@ document.addEventListener("DOMContentLoaded", () => {
     scissors.innerHTML = "Scissors";
     playerDisplayScoreSentence = "Player's Score For The Round";
     robotDisplayScoreSentence = "Robots' Score For The Round";
+    playerDisplayTotalScoreSentence = "Total Score";
     playerScoreDisplay.innerHTML = `${playerDisplayScoreSentence}: ${playerPoints}`;
     robotScoreDisplay.innerHTML = `${robotDisplayScoreSentence}: ${robotPoints}`;
   }
@@ -194,7 +206,7 @@ document.addEventListener("DOMContentLoaded", () => {
     scissors.removeEventListener("click", scissorsPlayedHandler);
     // rock.style.backgroundColor = "grey";
     playerOptions.forEach((item) =>
-      item.innerHTML.toLowerCase() === playerChoice
+      item.className.includes(playerChoice)
         ? item.classList.add("blue-background")
         : item.classList.add("grey-background")
     );
@@ -223,13 +235,17 @@ document.addEventListener("DOMContentLoaded", () => {
       resetRoundPoints();
       // displayTotalScore()
       removeRoundScores();
-      console.log(`total Score = ${totalScore}`);
     } else if (robotPoints === 3) {
       gameOver();
-      console.log(`Final Total Score = ${totalScore}`);
-      console.log("game over");
-      console.log(`total Score = ${totalScore}`);
     }
+  }
+
+  function gameOver() {
+    resetRoundPoints();
+    totalScore = 0;
+    removeRoundScores();
+    // displaySaveScore()
+    // displayHighestScore()
   }
 
   function removeRoundScores() {
@@ -242,14 +258,6 @@ document.addEventListener("DOMContentLoaded", () => {
     robotPoints = 0;
   }
 
-  function gameOver() {
-    resetRoundPoints();
-    totalScore = 0;
-    removeRoundScores();
-    // displaySaveScore()
-    // displayHighestScore()
-  }
-
   function callInsertData() {
     console.log(`${totalScore} from app`);
     InsertData(totalScore);
@@ -260,6 +268,7 @@ document.addEventListener("DOMContentLoaded", () => {
   insertBtn.addEventListener("click", callInsertData);
   findBtn.addEventListener("click", FindData);
   enableClicks();
+  console.log(playerOptions[0].className.includes("rock"));
 });
 
 //generate random id instead of name as an id (to avoid overwriting) (done)

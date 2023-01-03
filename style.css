@@ -155,6 +155,29 @@ h1 {
   align-items: center;
 }
 
+.display-total-score-box {
+  background: rgb(154, 218, 236);
+  display: flex;
+  height: 80px;
+  justify-content: center;
+  margin-bottom: 16px;
+  gap: 3%;
+}
+
+.display-total-score-box div:empty {
+  display: None;
+}
+
+.display-total-score-box div {
+  display: flex;
+  background: rgb(149, 248, 119);
+  border: solid 2px;
+  width: 33%;
+  border-radius: 7%;
+  justify-content: center;
+  align-items: center;
+}
+
 @media (min-width: 580px) {
   .languages {
     gap: 0.5%;
@@ -196,6 +219,14 @@ h1 {
   }
 
   .display-scores-box div {
+    width: 15%;
+  }
+
+  .display-total-score-box {
+    height: 100px;
+  }
+
+  .display-total-score-box div {
     width: 15%;
   }
 }

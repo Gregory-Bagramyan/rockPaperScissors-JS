@@ -19,6 +19,10 @@ document.addEventListener("DOMContentLoaded", () => {
   const playerTotalScoreDisplay = document.querySelector(
     ".display-player-total-score"
   );
+  const saveScoresBox = document.querySelector(".save-score");
+  const saveScoreButton = document.querySelector(".save-player-name-button");
+  const highestScore = document.querySelector(".highest-scores-display");
+  const playAgain = document.querySelector(".play-again");
   const posibleChoices = ["rock", "paper", "scissors"];
 
   let language = "english";
@@ -241,11 +245,27 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   function gameOver() {
+    disableClicks();
+    displaySaveScore();
+    // displayHighestScore() triggered by the click
     resetRoundPoints();
     totalScore = 0;
     removeRoundScores();
-    // displaySaveScore()
-    // displayHighestScore()
+    removeDisplays();
+    enableClicks();
+  }
+
+  function displaySaveScore() {
+    saveScoresBox.classList.add("open-pop-up");
+  }
+
+  function displayHighestScores() {
+    saveScoresBox.classList.remove("open-pop-up");
+    highestScore.classList.add("open-pop-up");
+  }
+
+  function closeHighestScoresPopUp() {
+    highestScore.classList.remove("open-pop-up");
   }
 
   function removeRoundScores() {
@@ -266,9 +286,10 @@ document.addEventListener("DOMContentLoaded", () => {
   french.addEventListener("click", translateToFrench);
   english.addEventListener("click", translateToEnglish);
   insertBtn.addEventListener("click", callInsertData);
-  findBtn.addEventListener("click", FindData);
+  saveScoreButton.addEventListener("click", displayHighestScores);
+  playAgain.addEventListener("click", closeHighestScoresPopUp);
+  // findBtn.addEventListener("click", FindData);
   enableClicks();
-  console.log(playerOptions[0].className.includes("rock"));
 });
 
 //generate random id instead of name as an id (to avoid overwriting) (done)

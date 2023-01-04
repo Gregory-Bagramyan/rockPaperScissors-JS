@@ -42,13 +42,9 @@ function InsertData(totalScore) {
   set(ref(db, "User/" + "user" + Date.now()), {
     Name: enterName.value,
     Score: totalScore,
-  })
-    .then(() => {
-      alert("data added successfully");
-    })
-    .catch((error) => {
-      alert(error);
-    });
+  }).catch((error) => {
+    alert(error);
+  });
 }
 
 async function FindData() {

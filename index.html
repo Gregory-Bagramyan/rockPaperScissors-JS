@@ -36,20 +36,35 @@
     <div class="display-total-score-box">
       <div class="display-player-total-score"></div>
     </div>
-    <div class="database">
+    <div class="save-score">
       <div id="enterDetails">
-        <h2>Enter Details</h2>
-        <h4>Player Name</h4>
-        <input id="enterName" type="text" />
-        <button id="insert">INSERT</button>
+        <h2 class="game-over">Game Over</h2>
+        <h4 class="player-name">Enter Player Name</h4>
+        <div class="enter-player-name-box">
+          <input class="enter-player-name" id="enterName" type="text" />
+        </div>
+        <div class="save-player-name-button-box">
+          <button class="save-player-name-button" id="insert">
+            Save Score
+          </button>
+        </div>
       </div>
-      <div id="findrDetails">
+      <div class="highest-scores-display">
+        <div>
+          <h2 class="game-over">Highest Scores</h2>
+          <div class="save-player-name-button-box">
+            <button class="play-again">
+              Play again
+            </button>
+          </div>
+        </div>
+      <!-- <div id="findrDetails">
         <h2>Find Details</h2>
         <h4>Player Name</h4>
         <input id="findName" type="text" />
         <button id="find">FIND</button>
         <h4 id="findScore" type="text"></h4>
-      </div>
+      </div> -->
     </div>
   </body>
 </html>

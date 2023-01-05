@@ -3,7 +3,6 @@ import { initializeApp } from "https://www.gstatic.com/firebasejs/9.15.0/firebas
 import firebaseConfig from "./config.js";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
-let highestScore = 1;
 let highestScoresList = [];
 
 function delay(milliseconds) {
@@ -45,6 +44,7 @@ function InsertData(totalScore) {
   }).catch((error) => {
     alert(error);
   });
+  totalScore = 0;
 }
 
 async function FindData() {
@@ -62,7 +62,8 @@ async function getAllDataOnce() {
 
   await delay(800);
   highestScoresList.reverse();
-  console.log(highestScoresList);
+  console.log(highestScoresList.slice(0, 3));
+  console.log(typeof highestScoresList);
   // console.log(highestScoresList[0].Score);
 }
 

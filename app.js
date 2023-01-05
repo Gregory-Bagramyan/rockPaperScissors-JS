@@ -22,6 +22,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const saveScoresBox = document.querySelector(".save-score");
   const saveScoreButton = document.querySelector(".save-player-name-button");
   const highestScore = document.querySelector(".highest-scores-display");
+  const highestScoreTitle = document.querySelector(".highest-score-title");
   const playAgain = document.querySelector(".play-again");
   const posibleChoices = ["rock", "paper", "scissors"];
 
@@ -249,7 +250,6 @@ document.addEventListener("DOMContentLoaded", () => {
     displaySaveScore();
     // displayHighestScore() triggered by the click
     resetRoundPoints();
-    totalScore = 0;
     removeRoundScores();
     removeDisplays();
     enableClicks();
@@ -261,6 +261,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
   function displayHighestScores() {
     saveScoresBox.classList.remove("open-pop-up");
+    let div = document.createElement("div");
+    highestScoreTitle.after(div, "text");
     highestScore.classList.add("open-pop-up");
   }
 
@@ -290,6 +292,8 @@ document.addEventListener("DOMContentLoaded", () => {
   playAgain.addEventListener("click", closeHighestScoresPopUp);
   // findBtn.addEventListener("click", FindData);
   enableClicks();
+  displayHighestScores();
+  FindData();
 });
 
 //generate random id instead of name as an id (to avoid overwriting) (done)

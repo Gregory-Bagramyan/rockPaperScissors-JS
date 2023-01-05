@@ -202,15 +202,21 @@ h1 {
 .game-over,
 .player-name,
 .enter-player-name-box,
-.save-player-name-button-box {
+.save-player-name-button-box,
+.highest-score-title {
   display: flex;
   justify-content: center;
   margin-bottom: 30px;
 }
-.game-over {
+.game-over,
+.highest-score-title {
   margin-top: 30px;
   margin-bottom: 80px;
   font-size: 2.5rem;
+}
+
+.highest-score-title {
+  font-size: 2.2rem;
 }
 
 @media (min-width: 580px) {

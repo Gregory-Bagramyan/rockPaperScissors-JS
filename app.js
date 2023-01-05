@@ -138,6 +138,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   function displayTotalScore() {
+    console.log("displayTotalScores have been triggered");
     playerTotalScoreDisplay.innerHTML = `${playerDisplayTotalScoreSentence}: ${totalScore}`;
   }
 
@@ -173,6 +174,7 @@ document.addEventListener("DOMContentLoaded", () => {
     checkTotalScore();
     await delay(200);
     displayTotalScore();
+    checkGamoOver();
     enableClicks();
   }
 
@@ -240,7 +242,11 @@ document.addEventListener("DOMContentLoaded", () => {
       resetRoundPoints();
       // displayTotalScore()
       removeRoundScores();
-    } else if (robotPoints === 3) {
+    }
+  }
+
+  function checkGamoOver() {
+    if (robotPoints === 3) {
       gameOver();
     }
   }
@@ -264,6 +270,8 @@ document.addEventListener("DOMContentLoaded", () => {
     let div = document.createElement("div");
     highestScoreTitle.after(div, "text");
     highestScore.classList.add("open-pop-up");
+    removeTotalScore();
+    totalScore = 0;
   }
 
   function closeHighestScoresPopUp() {
@@ -273,6 +281,11 @@ document.addEventListener("DOMContentLoaded", () => {
   function removeRoundScores() {
     playerScoreDisplay.innerHTML = null;
     robotScoreDisplay.innerHTML = null;
+  }
+
+  function removeTotalScore() {
+    console.log("removeTotalScore have been triggered");
+    playerTotalScoreDisplay.innerHTML = null;
   }
 
   function resetRoundPoints() {
@@ -292,8 +305,8 @@ document.addEventListener("DOMContentLoaded", () => {
   playAgain.addEventListener("click", closeHighestScoresPopUp);
   // findBtn.addEventListener("click", FindData);
   enableClicks();
-  displayHighestScores();
-  FindData();
+  // displayHighestScores();
+  // FindData();
 });
 
 //generate random id instead of name as an id (to avoid overwriting) (done)

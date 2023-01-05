@@ -44,7 +44,6 @@ function InsertData(totalScore) {
   }).catch((error) => {
     alert(error);
   });
-  totalScore = 0;
 }
 
 async function FindData() {

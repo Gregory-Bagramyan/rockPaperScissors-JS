@@ -175,7 +175,6 @@ document.addEventListener("DOMContentLoaded", () => {
     await delay(200);
     displayTotalScore();
     checkGamoOver();
-    enableClicks();
   }
 
   function translateToFrench() {
@@ -240,8 +239,9 @@ document.addEventListener("DOMContentLoaded", () => {
     if (playerPoints === 3) {
       totalScore += 1;
       resetRoundPoints();
-      // displayTotalScore()
       removeRoundScores();
+    } else {
+      enableClicks();
     }
   }
 
@@ -253,12 +253,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
   function gameOver() {
     disableClicks();
+    console.log("disable clicks from gameOver");
     displaySaveScore();
     // displayHighestScore() triggered by the click
     resetRoundPoints();
     removeRoundScores();
     removeDisplays();
-    enableClicks();
   }
 
   function displaySaveScore() {
@@ -276,6 +276,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   function closeHighestScoresPopUp() {
     highestScore.classList.remove("open-pop-up");
+    enableClicks();
   }
 
   function removeRoundScores() {

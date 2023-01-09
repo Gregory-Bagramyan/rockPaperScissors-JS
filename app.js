@@ -1,4 +1,11 @@
-import { InsertData, insertBtn, FindData, findBtn } from "./db.js";
+import {
+  InsertData,
+  insertBtn,
+  FindData,
+  findBtn,
+  highestScoresList,
+  getAllDataOnce,
+} from "./db.js";
 
 document.addEventListener("DOMContentLoaded", () => {
   const h1 = document.querySelector("h1");
@@ -142,41 +149,6 @@ document.addEventListener("DOMContentLoaded", () => {
     playerTotalScoreDisplay.innerHTML = `${playerDisplayTotalScoreSentence}: ${totalScore}`;
   }
 
-  function rockPlayedHandler() {
-    playerChoice = "rock";
-    initiateGameSequence();
-  }
-
-  function paperPlayedHandler() {
-    playerChoice = "paper";
-    initiateGameSequence();
-  }
-
-  function scissorsPlayedHandler() {
-    playerChoice = "scissors";
-    initiateGameSequence();
-  }
-
-  async function initiateGameSequence() {
-    disableClicks();
-    removeDisplays();
-    await delay(300);
-    displayPlayerChoice(playerChoice);
-    await delay(300);
-    displayRobotChoice(robotChoosing());
-    determinWinner();
-    countPoints();
-    const endGameSentence = determinWinnerSentence();
-    await delay(300);
-    displayEngGameSentence(endGameSentence);
-    await delay(300);
-    displayScores();
-    checkTotalScore();
-    await delay(200);
-    displayTotalScore();
-    checkGamoOver();
-  }
-
   function translateToFrench() {
     removeDisplays();
 
@@ -240,6 +212,7 @@ document.addEventListener("DOMContentLoaded", () => {
       totalScore += 1;
       resetRoundPoints();
       removeRoundScores();
+      enableClicks();
     } else {
       enableClicks();
     }
@@ -265,13 +238,45 @@ document.addEventListener("DOMContentLoaded", () => {
     saveScoresBox.classList.add("open-pop-up");
   }
 
-  function displayHighestScores() {
-    saveScoresBox.classList.remove("open-pop-up");
-    let div = document.createElement("div");
-    highestScoreTitle.after(div, "text");
-    highestScore.classList.add("open-pop-up");
-    removeTotalScore();
-    totalScore = 0;
+  async function displayHighestScores() {
+    let tableBox = document.createElement("div");
+    tableBox.setAttribute("id", "table-box");
+    let table = document.createElement("table");
+    table.setAttribute("id", "tbody");
+
+    getAllDataOnce().then(function (result) {
+      let topScores = result;
+      highestScoreTitle.after(tableBox);
+      tableBox.appendChild(table);
+      tbody.innerHTML =
+        "<tr>" +
+        "<td>" +
+        "Player Name" +
+        "</td>" +
+        "<td>" +
+        "Score" +
+        "</td>" +
+        "</tr>";
+      for (let i = 0; i < topScores.length; i++) {
+        // console.log(topScores[i].Name);
+        // console.log(topScores[i].Score);
+        let tr = "<tr>";
+        tr +=
+          "<td>" +
+          topScores[i].Name +
+          "</td>" +
+          "<td>" +
+          topScores[i].Score +
+          "</td></tr>";
+        tbody.innerHTML += tr;
+        saveScoresBox.classList.remove("open-pop-up");
+        highestScore.classList.add("open-pop-up");
+        removeTotalScore();
+        totalScore = 0;
+      }
+    });
+
+    // console.log(Object.keys(topScores).length);
   }
 
   function closeHighestScoresPopUp() {
@@ -297,6 +302,41 @@ document.addEventListener("DOMContentLoaded", () => {
   function callInsertData() {
     console.log(`${totalScore} from app`);
     InsertData(totalScore);
+  }
+
+  function rockPlayedHandler() {
+    playerChoice = "rock";
+    initiateGameSequence();
+  }
+
+  function paperPlayedHandler() {
+    playerChoice = "paper";
+    initiateGameSequence();
+  }
+
+  function scissorsPlayedHandler() {
+    playerChoice = "scissors";
+    initiateGameSequence();
+  }
+
+  async function initiateGameSequence() {
+    disableClicks();
+    removeDisplays();
+    await delay(300);
+    displayPlayerChoice(playerChoice);
+    await delay(300);
+    displayRobotChoice(robotChoosing());
+    determinWinner();
+    countPoints();
+    const endGameSentence = determinWinnerSentence();
+    await delay(300);
+    displayEngGameSentence(endGameSentence);
+    await delay(300);
+    displayScores();
+    checkTotalScore();
+    await delay(200);
+    displayTotalScore();
+    checkGamoOver();
   }
 
   french.addEventListener("click", translateToFrench);

@@ -61,9 +61,18 @@ async function getAllDataOnce() {
 
   await delay(800);
   highestScoresList.reverse();
-  console.log(highestScoresList.slice(0, 3));
-  console.log(typeof highestScoresList);
+  let topScores = highestScoresList.slice(0, 3);
+  // console.log(highestScoresList.slice(0, 3));
+  // console.log(topScores);
+  return topScores;
   // console.log(highestScoresList[0].Score);
 }
 
-export { InsertData, insertBtn, FindData, findBtn };
+export {
+  InsertData,
+  insertBtn,
+  FindData,
+  findBtn,
+  highestScoresList,
+  getAllDataOnce,
+};

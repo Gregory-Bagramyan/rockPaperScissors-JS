@@ -38,6 +38,10 @@ h1 {
   margin-bottom: 16px;
 }
 
+td {
+  justify-content: center;
+}
+
 .player-selection {
   display: flex;
   background-color: aqua;
@@ -221,6 +225,16 @@ h1 {
 
 .highest-score-title {
   font-size: 2.2rem;
+}
+
+#tbody {
+  justify-content: center;
+  margin-bottom: 30px;
+}
+
+#table-box {
+  display: flex;
+  justify-content: center;
 }
 
 @media (min-width: 580px) {
